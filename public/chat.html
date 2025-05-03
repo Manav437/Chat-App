@@ -2,12 +2,10 @@
 <html lang="en">
     <head>
         <title>Chat App</title>
-        <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/a/a4/Kanye_West_-_Jesus_Is_King.png">
+        <link rel="icon" href="/images/favicon.png">
         <link rel="stylesheet" href="./css/styles.css">
-
     </head>
     <body>
-
         <div class="chat">
             <div id="sidebar" class="chat__sidebar">
 
@@ -48,8 +46,11 @@
         </script>
         
         <script id="sidebar-template" type="text/html">
-            <h2 class="room-title">{{room}}</h2>
-            <h3 class="list-title">Users</h3>
+            <div class="nav-chat">
+                <a href="/chatroom.html"><img src="/images/back-img.png" alt=""></a>
+                <h2 class="room-title"><span>Room:</span> <br> {{room}}</h2>
+            </div>
+            <h3 class="list-title">Users:</h3>
             <ul class="users">
                 <!-- used to render a array -->
                 {{#users}}

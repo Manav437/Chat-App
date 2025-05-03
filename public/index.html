@@ -2,22 +2,148 @@
 <html lang="en">
     <head>
         <title>Chat App</title>
-        <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/a/a4/Kanye_West_-_Jesus_Is_King.png">      
+        <link rel="icon" href="images/favicon.png">      
         <link rel="stylesheet" href="./css/styles.css">
         
     </head>
     <body>
-        <div class="centered-form">
-            <div class="centered-form__box">
-                <h1>Join</h1>
-                <form action="/chat.html">
-                    <label>Display name</label>
-                    <input type="text" name="username" placeholder="Display name" required>
-                    <label>Room</label>
-                    <input type="text" name="room" placeholder="Room" required>
-                    <button>Join</button>
-                </form>
-            </div> 
+        <div class="home-container">
+            <header>
+                <h1>Welcome to <span>Chatly</span></h1>
+                <p>Real-time, fun, and secure chatting powered by Socket.io. Connect with friends instantly!</p>
+                <a href="/chatroom.html" class="cta-button">Start Chatting</a>
+            </header>
+            
+            <section class="features">
+                <div class="feature-card">
+                  <h3>Real-time</h3>
+                  <p>Messages are delivered instantly across all devices without refresh.</p>
+                </div>
+                <div class="feature-card">
+                  <h3>Secure</h3>
+                  <p>Your chats are protected with end-to-end encryption technology.</p>
+                </div>
+                <div class="feature-card">
+                  <h3>Customizable</h3>
+                  <p>Personalize your chat experience with themes, emojis, and more.</p>
+                </div>
+                <div class="feature-card">
+                  <h3>Global</h3>
+                  <p>Chat with users from anywhere in the world in one platform.</p>
+                </div>
+            </section>
+
+              <section class="how-it-works">
+                <h2>How It Works</h2>
+                <div class="steps">
+                  <div class="step">
+                    <h3>1. Enter a Chatroom Name</h3>
+                    <p>Simply choose or type a chatroom name to join or create a room instantly.</p>
+                  </div>
+                  <div class="step">
+                    <h3>2. Enter Your Name</h3>
+                    <p>Enter your display name so others know who you are.</p>
+                  </div>
+                  <div class="step">
+                    <h3>3. Start Chatting</h3>
+                    <p>Enjoy real-time chatting with everyone in the room. No signup or login needed!</p>
+                  </div>
+                </div>
+              </section>
+            
+              <section class="testimonials">
+                <h2>What Our Users Say</h2>
+                <div class="testimonial-cards">
+                  <div class="testimonial">
+                    <p>“Chatly made it so easy to stay in touch with my team remotely. Love the real-time updates!”</p>
+                    <strong>- Priya S.</strong>
+                  </div>
+                  <div class="testimonial">
+                    <p>“Finally a chat app that’s simple, fast, and doesn’t spam me with ads.”</p>
+                    <strong>- Alex M.</strong>
+                  </div>
+                  <div class="testimonial">
+                    <p>“I use Chatly daily for study groups. The group chatrooms are amazing!”</p>
+                    <strong>- Rajesh K.</strong>
+                  </div>
+                </div>
+              </section>
+            
+              <section class="faq">
+                <h2>Frequently Asked Questions</h2>
+              
+                <div class="faq-item">
+                  <button class="faq-question">Is Chatly free to use?</button>
+                  <div class="faq-answer">
+                    <p>Yes! Chatly is completely free with no hidden charges.</p>
+                  </div>
+                </div>
+              
+                <div class="faq-item">
+                  <button class="faq-question">Do I need to install anything?</button>
+                  <div class="faq-answer">
+                    <p>No installation needed—Chatly works right in your browser!</p>
+                  </div>
+                </div>
+              
+                <div class="faq-item">
+                  <button class="faq-question">Can I create private chatrooms?</button>
+                  <div class="faq-answer">
+                    <p>Absolutely! You can create both public and private chatrooms with password protection.</p>
+                  </div>
+                </div>
+              </section>
+            
+              <footer>
+                <div class="footer-container">
+                  <div class="footer-text">
+                    &copy; 2025 Chatly. Crafted with ❤️ and Socket.io.
+                  </div>
+                  <div class="footer-socials">
+                    <a href="https://github.com/Manav437" target="_blank" aria-label="GitHub">
+                      <img src="/images/github.png" alt="GitHub">
+                    </a>
+                    <a href="https://www.linkedin.com/in/manav-gusain/" target="_blank" aria-label="LinkedIn">
+                      <img src="/images/linkedin.png" alt="LinkedIn">
+                    </a>
+                    <a href="https://x.com/Manav437" target="_blank" aria-label="X">
+                      <img src="/images/x.png" alt="X">
+                    </a>
+                  </div>
+              
+                  <div class="footer-links">
+                    <a href="/privacy-policy.html">Privacy Policy</a> | 
+                    <a href="/terms-of-service.html">Terms of Service</a> |
+                    <a href="/about.html">About Us</a> |
+                    <a href="/contact.html">Contact</a>
+                  </div>
+              
+                  <div class="footer-newsletter">
+                    <p>Sign up for updates:</p>
+                    <form action="#" method="post">
+                      <input type="email" placeholder="Your email" required>
+                      <button type="submit">Subscribe</button>
+                    </form>
+                  </div>
+                </div>
+              </footer>
+
         </div>
+
+        <script>
+            const questions = document.querySelectorAll('.faq-question');
+
+            questions.forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+
+                if (answer.style.maxHeight && answer.style.maxHeight !== "0px") {
+                answer.style.maxHeight = null;
+                } else {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                }
+            });
+        })         
+        </script>
     </body>
 </html>

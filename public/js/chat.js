@@ -17,6 +17,10 @@ const sidebarTemplate = document.querySelector('#sidebar-template').innerHTML
 //we just destructured it
 const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })          //to get rid of question mark in query string
 
+const questions = document.querySelectorAll('.faq-question');
+
+
+
 const autoscroll = () => {
     //new element
     const $newMessage = $messages.lastElementChild
