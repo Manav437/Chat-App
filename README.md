@@ -1,9 +1,10 @@
-# Chatly ✦
+# Chatly
 
 > *"Talk is cheap. Privacy isn't."*  
 > A refined space for transient conversations. No logs, no noise, just the present moment.
 
-![Chatly Aesthetic](public/images/favicon.png)
+<img width="1920" height="1080" alt="chatly-img" src="https://github.com/user-attachments/assets/46eb0c4f-5cb7-43e6-be01-dc14e7791538" />
+
 
 ## Overview
 
