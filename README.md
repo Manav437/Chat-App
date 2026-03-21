@@ -62,8 +62,3 @@ The platform is inherently ready for Platform-as-a-Service (PaaS) deployments li
 const port = process.env.PORT || 3000;
 server.listen(port);
 ```
-
-## Credits & License
-
-Engineered with ❤️ by **Chatly Laboratory**.  
-This project is open-source and free to be cloned, customized, and experienced.
