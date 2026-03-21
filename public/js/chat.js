@@ -46,10 +46,12 @@ const autoscroll = () => {
 
 socket.on('message', (message) => {
     console.log(message)
+    const isOwnMessage = message.username.toLowerCase() === username.toLowerCase()
     const html = Mustache.render(messageTemplate, {
         username: message.username,
         message: message.text,
-        createdAt: moment(message.createdAt).format('h:mm a')
+        createdAt: moment(message.createdAt).format('h:mm a'),
+        messageClass: isOwnMessage ? 'message--own' : ''
     })
     $messages.insertAdjacentHTML('beforeend', html)
 
@@ -58,10 +60,12 @@ socket.on('message', (message) => {
 
 socket.on('locationMessage', (message) => {
     console.log(message)
+    const isOwnMessage = message.username.toLowerCase() === username.toLowerCase()
     const html = Mustache.render(locationTemplate, {
         username: message.username,
         url: message.url,
-        createdAt: moment(message.createdAt).format('h:mm a')
+        createdAt: moment(message.createdAt).format('h:mm a'),
+        messageClass: isOwnMessage ? 'message--own' : ''
     })
     $messages.insertAdjacentHTML('beforeend', html)
 

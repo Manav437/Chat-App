@@ -1,149 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="bg-[#0f0f10] text-[#e4e4e7] min-h-screen">
     <head>
-        <title>Chat App</title>
-        <link rel="icon" href="images/favicon.png">      
-        <link rel="stylesheet" href="./css/styles.css">
-        
-    </head>
-    <body>
-        <div class="home-container">
-            <header>
-                <h1>Welcome to <span>Chatly</span></h1>
-                <p>Real-time, fun, and secure chatting powered by Socket.io. Connect with friends instantly!</p>
-                <a href="/chatroom.html" class="cta-button">Start Chatting</a>
-            </header>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Chatly</title>
+        <link rel="icon" href="/images/favicon.png">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
             
-            <section class="features">
-                <div class="feature-card">
-                  <h3>Real-time</h3>
-                  <p>Messages are delivered instantly across all devices without refresh.</p>
+            body { 
+                font-family: 'Inter', sans-serif; 
+                letter-spacing: -0.01em;
+            }
+
+            .premium-card {
+                background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+                border: 1px solid rgba(255,255,255,0.08);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .premium-card:hover {
+                border-color: rgba(255,255,255,0.2);
+                background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            }
+
+            .btn-premium {
+                background: #ffffff;
+                color: #000000;
+                transition: all 0.3s ease;
+                box-shadow: 0 0 0 0 rgba(255,255,255,0);
+            }
+
+            .btn-premium:hover {
+                background: #f4f4f5;
+                transform: scale(1.02);
+                box-shadow: 0 10px 20px -10px rgba(255,255,255,0.1);
+            }
+        </style>
+    </head>
+    <body class="antialiased selection:bg-white/10">
+        <div class="max-w-6xl mx-auto px-8">
+            
+            <nav class="flex justify-between items-center py-10">
+                <div class="text-2xl font-medium tracking-tighter flex items-center gap-2">
+                    <img class="h-8" src="/images/favicon.png"/>
+                    Chatly
                 </div>
-                <div class="feature-card">
-                  <h3>Secure</h3>
-                  <p>Your chats are protected with end-to-end encryption technology.</p>
+                <div class="flex gap-8 text-xs font-medium uppercase tracking-[0.2em] text-gray-500">
+                    <a href="/" class="hover:text-white transition-colors">Platform</a>
+                    <a href="/" class="hover:text-white transition-colors">Security</a>
                 </div>
-                <div class="feature-card">
-                  <h3>Customizable</h3>
-                  <p>Personalize your chat experience with themes, emojis, and more.</p>
+            </nav>
+
+            <header class="flex flex-col md:flex-row items-center justify-between mt-20 mb-40 gap-16">
+                <div class="md:w-[60%] flex flex-col justify-center">
+                    <h1 class="text-6xl md:text-8xl font-medium tracking-tighter mb-8 text-white leading-[0.9]">
+                        Talk is cheap. <br/>
+                        <span class="text-gray-400 opacity-40 font-light">Privacy isn't.</span>
+                    </h1>
+                    <p class="text-gray-500 text-lg md:text-xl font-light leading-relaxed mb-10 max-w-lg">
+                        A refined space for transient conversations. No logs, no noise, just the present moment.
+                    </p>
+                    <div>
+                        <a href="/chatroom.html" class="btn-premium inline-block px-10 py-4 rounded-full font-semibold">
+                            Enter Lounge
+                        </a>
+                    </div>
                 </div>
-                <div class="feature-card">
-                  <h3>Global</h3>
-                  <p>Chat with users from anywhere in the world in one platform.</p>
+
+                <div class="hidden md:block md:w-[35%] lg:w-[30%]">
+                    <div class="aspect-[3/4] overflow-hidden rounded-xl ring-4 ring-white/10 shadow-2xl relative group">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f0f10] via-transparent to-transparent opacity-40"></div>
+                        
+                        <img 
+                            src="/images/landing-img.png" 
+                            alt="Interface Preview"
+                            class="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                        />
+                    </div>
+                </div>
+            </header>
+
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-40">
+                <div class="premium-card rounded-3xl p-10">
+                    <div class="text-white text-sm font-semibold mb-12 uppercase tracking-widest opacity-50">01 / Instant</div>
+                    <p class="text-xl text-gray-300 font-light">Engineered for sub-100ms latency. Feels like being in the same room.</p>
+                </div>
+                
+                <div class="premium-card rounded-3xl p-10">
+                    <div class="text-white text-sm font-semibold mb-12 uppercase tracking-widest opacity-50">02 / Ephemeral</div>
+                    <p class="text-xl text-gray-300 font-light">Data persists only in memory. When the session ends, the history vanishes.</p>
+                </div>
+
+                <div class="premium-card rounded-3xl p-10">
+                    <div class="text-white text-sm font-semibold mb-12 uppercase tracking-widest opacity-50">03 / Global</div>
+                    <p class="text-xl text-gray-300 font-light">Cross-continent synchronization powered by a distributed node network.</p>
                 </div>
             </section>
 
-              <section class="how-it-works">
-                <h2>How It Works</h2>
-                <div class="steps">
-                  <div class="step">
-                    <h3>1. Enter a Chatroom Name</h3>
-                    <p>Simply choose or type a chatroom name to join or create a room instantly.</p>
-                  </div>
-                  <div class="step">
-                    <h3>2. Enter Your Name</h3>
-                    <p>Enter your display name so others know who you are.</p>
-                  </div>
-                  <div class="step">
-                    <h3>3. Start Chatting</h3>
-                    <p>Enjoy real-time chatting with everyone in the room. No signup or login needed!</p>
-                  </div>
+            <footer class="pb-20 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-xs text-gray-600 uppercase tracking-widest">
+                    &copy; 2025 Chatly Laboratory
                 </div>
-              </section>
-            
-              <section class="testimonials">
-                <h2>What Our Users Say</h2>
-                <div class="testimonial-cards">
-                  <div class="testimonial">
-                    <p>“Chatly made it so easy to stay in touch with my team remotely. Love the real-time updates!”</p>
-                    <strong>- Priya S.</strong>
-                  </div>
-                  <div class="testimonial">
-                    <p>“Finally a chat app that’s simple, fast, and doesn’t spam me with ads.”</p>
-                    <strong>- Alex M.</strong>
-                  </div>
-                  <div class="testimonial">
-                    <p>“I use Chatly daily for study groups. The group chatrooms are amazing!”</p>
-                    <strong>- Rajesh K.</strong>
-                  </div>
-                </div>
-              </section>
-            
-              <section class="faq">
-                <h2>Frequently Asked Questions</h2>
-              
-                <div class="faq-item">
-                  <button class="faq-question">Is Chatly free to use?</button>
-                  <div class="faq-answer">
-                    <p>Yes! Chatly is completely free with no hidden charges.</p>
-                  </div>
-                </div>
-              
-                <div class="faq-item">
-                  <button class="faq-question">Do I need to install anything?</button>
-                  <div class="faq-answer">
-                    <p>No installation needed—Chatly works right in your browser!</p>
-                  </div>
-                </div>
-              
-                <div class="faq-item">
-                  <button class="faq-question">Can I create private chatrooms?</button>
-                  <div class="faq-answer">
-                    <p>Absolutely! You can create both public and private chatrooms with password protection.</p>
-                  </div>
-                </div>
-              </section>
-            
-              <footer>
-                <div class="footer-container">
-                  <div class="footer-text">
-                    &copy; 2025 Chatly. Crafted with ❤️ and Socket.io.
-                  </div>
-                  <div class="footer-socials">
-                    <a href="https://github.com/Manav437" target="_blank" aria-label="GitHub">
-                      <img src="/images/github.png" alt="GitHub">
+                
+                <div class="flex gap-10">
+                    <a target="_blank" href="https://github.com/Manav437" class="grayscale opacity-40 hover:opacity-100 hover:grayscale-0 transition-all duration-500">
+                        <img src="/images/github.png" alt="Github" class="w-5 h-5 invert">
                     </a>
-                    <a href="https://www.linkedin.com/in/manav-gusain/" target="_blank" aria-label="LinkedIn">
-                      <img src="/images/linkedin.png" alt="LinkedIn">
+                    <a target="_blank" href="https://x.com/Manav437" class="grayscale opacity-40 hover:opacity-100 hover:grayscale-0 transition-all duration-500">
+                        <img src="/images/x.png" alt="X" class="w-5 h-5 invert">
                     </a>
-                    <a href="https://x.com/Manav437" target="_blank" aria-label="X">
-                      <img src="/images/x.png" alt="X">
-                    </a>
-                  </div>
-              
-                  <div class="footer-links">
-                    <a href="/privacy-policy.html">Privacy Policy</a> | 
-                    <a href="/terms-of-service.html">Terms of Service</a> |
-                    <a href="/about.html">About Us</a> |
-                    <a href="/contact.html">Contact</a>
-                  </div>
-              
-                  <div class="footer-newsletter">
-                    <p>Sign up for updates:</p>
-                    <form action="#" method="post">
-                      <input type="email" placeholder="Your email" required>
-                      <button type="submit">Subscribe</button>
-                    </form>
-                  </div>
                 </div>
-              </footer>
 
+                <div class="text-xs text-gray-600 space-x-6">
+                    <a href="#" class="hover:text-gray-400">Terms</a>
+                    <a href="#" class="hover:text-gray-400">Privacy</a>
+                </div>
+            </footer>
         </div>
-
-        <script>
-            const questions = document.querySelectorAll('.faq-question');
-
-            questions.forEach(button => {
-            button.addEventListener('click', () => {
-                const answer = button.nextElementSibling;
-
-                if (answer.style.maxHeight && answer.style.maxHeight !== "0px") {
-                answer.style.maxHeight = null;
-                } else {
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-                }
-            });
-        })         
-        </script>
     </body>
 </html>

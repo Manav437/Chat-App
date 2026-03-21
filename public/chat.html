@@ -1,68 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Chat App</title>
-        <link rel="icon" href="/images/favicon.png">
-        <link rel="stylesheet" href="./css/styles.css">
-    </head>
-    <body>
-        <div class="chat">
-            <div id="sidebar" class="chat__sidebar">
+<html lang="en" class="bg-[#0f0f10] text-[#e4e4e7] h-screen overflow-hidden selection:bg-white/10">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatly | Lounge</title>
+    <link rel="icon" href="/images/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            letter-spacing: -0.01em;
+        }
 
-            </div>
+        .premium-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+        }
 
-            <div class="chat__main">
-                <div id="messages" class="chat__messages"></div>
+        .input-premium {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-                <div class="compose">
-                    <form id="message-form">
-                        <input name="message" placeholder="Enter text" required autocomplete="off"/>
-                        <button>Submit</button>
-    
-                        <button id="send-location">Share your location</button>
-                    </form>
-                </div> 
-            </div>
+        .input-premium:focus {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            outline: none;
+        }
+        
+        .btn-primary {
+            background: #ffffff;
+            color: #000000;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #f4f4f5;
+            transform: scale(1.02);
+            box-shadow: 0 10px 20px -10px rgba(255,255,255,0.1);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message--own {
+            align-self: flex-end !important;
+            border-bottom-left-radius: 24px !important;
+            border-bottom-right-radius: 4px !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+            color: white !important;
+        }
+        .message--own .message__name {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="antialiased h-screen flex">
+    <!-- Sidebar container -->
+    <div id="sidebar" class="w-[280px] bg-[#0f0f10] border-r border-white/5 flex flex-col z-10 shrink-0">
+    </div>
+
+    <!-- Main Chat Area -->
+    <div class="flex-1 flex flex-col relative w-full h-full bg-[#0a0a0b]">
+        <div id="messages" class="flex-1 p-8 overflow-y-auto flex flex-col gap-6 scroll-smooth custom-scrollbar">
         </div>
 
-        <script id="message-template" type="text/html">
-            <div class="message">
-                <p>
-                    <span class="message__name">{{username}}</span>
-                    <span class="message__meta">{{createdAt}}</span>
-                </p>
-                <p>{{message}}</p>
-            </div>
-        </script>
+        <!-- Compose area -->
+        <div class="p-6 px-8 bg-[#0f0f10] border-t border-white/5 flex z-10">
+            <form id="message-form" class="flex w-full gap-4 items-center">
+                <input
+                    name="message"
+                    placeholder="Type a message..."
+                    required
+                    autocomplete="off"
+                    class="input-premium flex-1 py-4 px-6 rounded-2xl text-white placeholder:text-gray-500 text-[15px]"
+                />
+                <button
+                    class="btn-primary py-4 px-8 rounded-2xl font-semibold shadow-white/5 text-[15px]"
+                >
+                    Send
+                </button>
+                <button
+                    id="send-location"
+                    type="button"
+                    class="py-4 px-6 rounded-2xl premium-card text-gray-400 hover:text-white hover:border-white/20 transition-all font-medium text-sm"
+                >
+                    Location
+                </button>
+            </form>
+        </div>
+    </div>
 
-        <script id="location-template" type="text/html">
-            <div class="message">
-                <p>
-                    <span class="message__name">{{username}}</span>
-                    <span class="message__meta">{{createdAt}}</span>
-                </p>
-                <p><a href="{{url}}" target="_blank"> My current location</a></p>
+    <!-- Templates -->
+    <script id="message-template" type="text/html">
+        <div class="message {{messageClass}} premium-card p-5 rounded-3xl rounded-bl-md w-fit max-w-[75%] relative animate-[slideUpFade_0.4s_ease-out_forwards]">
+            <p class="flex items-center justify-between gap-4 mb-2">
+                <span class="message__name text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500">{{username}}</span>
+                <span class="message__meta text-[10px] uppercase tracking-[0.1em] text-gray-600">{{createdAt}}</span>
+            </p>
+            <p class="text-gray-200 leading-relaxed font-light text-[15px]">{{message}}</p>
+        </div>
+    </script>
+
+    <script id="location-template" type="text/html">
+        <div class="message {{messageClass}} premium-card p-5 rounded-3xl rounded-bl-md w-fit max-w-[75%] relative animate-[slideUpFade_0.4s_ease-out_forwards]">
+            <p class="flex items-center justify-between gap-4 mb-2">
+                <span class="message__name text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500">{{username}}</span>
+                <span class="message__meta text-[10px] uppercase tracking-[0.1em] text-gray-600">{{createdAt}}</span>
+            </p>
+            <p class="mt-1">
+                <a href="{{url}}" target="_blank" class="text-white border-b border-white/30 pb-0.5 hover:border-white transition-all font-light text-[15px]">📍 View Location</a>
+            </p>
+        </div>
+    </script>
+
+    <script id="sidebar-template" type="text/html">
+        <div class="flex flex-col mb-6">
+            <a href="/chatroom.html" class="p-8 flex items-center border-b border-b-gray-600 gap-3 text-xs font-medium uppercase tracking-[0.2em] text-gray-500 hover:text-white transition-colors group">
+                <svg class="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Leave
+            </a>
+            <div class="px-8 mt-4">
+                <span class="text-[10px] text-gray-600 uppercase tracking-[0.2em] mb-2 block">Current Lounge</span>
+                <h2 class="font-medium text-2xl text-white tracking-tight">{{room}}</h2>
             </div>
-        </script>
+        </div>
         
-        <script id="sidebar-template" type="text/html">
-            <div class="nav-chat">
-                <a href="/chatroom.html"><img src="/images/back-img.png" alt=""></a>
-                <h2 class="room-title"><span>Room:</span> <br> {{room}}</h2>
-            </div>
-            <h3 class="list-title">Users:</h3>
-            <ul class="users">
-                <!-- used to render a array -->
+        <div class="px-8 mt-4">
+            <h3 class="text-[10px] text-gray-600 uppercase tracking-[0.2em] mb-4">Active Participants</h3>
+            <ul class="list-none space-y-3">
                 {{#users}}
-                    <li>{{username}}</li>
+                <li class="flex items-center gap-3 text-gray-300 font-light text-[15px]">
+                    <span class="w-1.5 h-1.5 bg-white rounded-full opacity-80 shadow-[0_0_8px_rgba(255,255,255,0.8)]"></span>
+                    {{username}}
+                </li>
                 {{/users}}
             </ul>
-        </script>
+        </div>
+        
+        <div class="mt-auto p-8 border-t border-white/5">
+            <p class="text-[10px] text-gray-700 uppercase tracking-[0.3em] font-light">Secure Channel • Online</p>
+        </div>
+    </script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"></script>
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="/js/chat.js"></script>
-    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script>
+</body>
 </html>
